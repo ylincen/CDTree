@@ -23,7 +23,7 @@ for dataset in "${datasets[@]}"; do
         echo "Processing dataset: $dataset with number of indep features added: $perm"
         
         # Run R script for independent features file if it exists
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$indep_file" &
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$indep_file" &
     done
 done
 
@@ -38,7 +38,7 @@ for dataset in "${datasets[@]}"; do
         
         echo "Processing dataset: $dataset with number of dep features added: $perm"
 
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$dep_file" & 
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$dep_file" & 
     done
 done
 
@@ -68,7 +68,7 @@ for dataset in "${datasets[@]}"; do
         echo "Processing dataset: $dataset with number of indep features added: $perm"
         
         # Run R script for independent features file if it exists
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$indep_file" &
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$indep_file" &
     done
 done
 
@@ -83,7 +83,7 @@ for dataset in "${datasets[@]}"; do
         
         echo "Processing dataset: $dataset with number of dep features added: $perm"
 
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$dep_file" & 
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$dep_file" & 
     done
 done
 
@@ -110,7 +110,7 @@ for dataset in "${datasets[@]}"; do
         echo "Processing dataset: $dataset with number of indep features added: $perm"
         
         # Run R script for independent features file if it exists
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$indep_file" &
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$indep_file" &
     done
 done
 
@@ -123,7 +123,7 @@ for dataset in "${datasets[@]}"; do
         
         echo "Processing dataset: $dataset with number of dep features added: $perm"
 
-        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde.R "$dep_file" & 
+        Rscript ./conditional_entropy_estimation_fixed_hist/run_cde_scalability.R "$dep_file" & 
     done
 done
 
