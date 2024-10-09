@@ -1,7 +1,7 @@
 # CDTree: Conditional Entropy Estimation and Experiments
 
 ## I. About
-This is the original implementation of **CDTree**, a decision-tree-based model that can be used for **conditional density estimation (CDE)**, which was proposed in the paper **Yang, L & van Leeuwen, M Conditional Density Estimation with Histogram Trees. In: Proceedings of the Conference on Neural Information Processing Systems (NeurIPS 2024), 2024.**
+This is the original implementation of **CDTree**, a decision-tree-based model specifically designed for **conditional density estimation (CDE)**, which was proposed in the paper **Yang, L & van Leeuwen, M Conditional Density Estimation with Histogram Trees. In: Proceedings of the Conference on Neural Information Processing Systems (NeurIPS 2024), 2024.**
 
 The resulting model is fully interpretable and the training process does NOT require hyperparameter tuning (e.g., no need to tune the coefficient for regularization), as the learning criterion is designed based on the MDL principle. 
 
