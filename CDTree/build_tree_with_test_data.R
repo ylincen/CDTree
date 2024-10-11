@@ -1,5 +1,5 @@
 build_tree_with_test_data = function(x, z_matrix, x_test, z_test,
-                                     eps, qrf, print_process=TRUE, 
+                                     eps, print_process=TRUE, 
                                      default_grid_number=32){
   # x_test is only used for getting the boundary of the histogram
   # z_hist is used to determine which test instances belong to which leaf node, for prediction later
@@ -34,7 +34,6 @@ build_tree_with_test_data = function(x, z_matrix, x_test, z_test,
                                       current_num_leaf_nodes=length(node_list),
                                       eps=eps,
                                       x_test=x_test, z_test=z_test,
-                                      qrf=qrf,
                                       default_grid=default_grid)
     }
     
@@ -59,7 +58,7 @@ build_tree_with_test_data = function(x, z_matrix, x_test, z_test,
 
 search_z_split_with_test = function(node, x, z_matrix, default_hist_x, 
                           current_num_leaf_nodes, eps,
-                          x_test, z_test, qrf, default_grid){
+                          x_test, z_test, default_grid){
   if(!is.null(node$left_child)){
     return(node)
   }
@@ -73,7 +72,7 @@ search_z_split_with_test = function(node, x, z_matrix, default_hist_x,
                    current_num_leaf_nodes=current_num_leaf_nodes, 
                    node_to_split=node, eps=eps, 
                    z_matrix_local=z_matrix[node$indices,], 
-                   qrf=qrf, default_grid=default_grid)  
+                   default_grid=default_grid)  
     if(split_z_icol_res$best_gain > best_z_split$best_gain){
       best_z_split = split_z_icol_res
       best_z_split$z_cut_icol = icol

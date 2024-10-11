@@ -18,8 +18,7 @@ get_data_info = function(folder_path){
   return(df_res)  
 }
 
-df_res = get_data_info("./conditional_entropy_estimation_fixed_hist/permuted_dataset/")
+df_res = get_data_info("./CDTree/permuted_dataset/")
 
-# # save to a csv
-# write.csv(df_res, file = "./conditional_entropy_estimation_fixed_hist/permuted_dataset_info.csv", row.names = FALSE)
+
 

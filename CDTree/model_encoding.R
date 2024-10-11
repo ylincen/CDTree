@@ -1,3 +1,6 @@
+# This file collects functions that are used to calculate the code length needed
+#.  to encode model under the MDL framework. 
+
 get_cl_model_tree_change = function(num_leaf_nodes){
   current_cl_model_tree = Rissanen_integer_cl(num_leaf_nodes) + 
     log2_catalan(num_leaf_nodes - 1)  

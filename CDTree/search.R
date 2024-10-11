@@ -1,6 +1,6 @@
 search_split = function(x, z, z_num_dim, default_hist_x, 
                         current_num_leaf_nodes, node_to_split,
-                        eps, z_matrix_local, qrf, default_grid){
+                        eps, z_matrix_local, default_grid){
   # OUTPUT: 
   # list(best_hist=best_hist_all_layers, best_gain=best_gain_all_layers, 
   #      best_z_cut = best_z_cut_all_layers)

@@ -1,23 +1,24 @@
 rm(list=ls())
 options(warn=0)
-source("./conditional_entropy_estimation_fixed_hist/data_encoding.R")
-source("./conditional_entropy_estimation_fixed_hist/hist.R")
-source("./conditional_entropy_estimation_fixed_hist/candidate_cuts.R")
-source("./conditional_entropy_estimation_fixed_hist/model_encoding.R")
-source("./conditional_entropy_estimation_fixed_hist/search.R")
-source("./conditional_entropy_estimation_fixed_hist/Node.R")
-source("./conditional_entropy_estimation_fixed_hist/build_tree_with_test_data.R")
-source("./conditional_entropy_estimation_fixed_hist/get_test_log_likelihood.R")
+source("./CDTree/data_encoding.R")
+source("./CDTree/hist.R")
+source("./CDTree/candidate_cuts.R")
+source("./CDTree/model_encoding.R")
+source("./CDTree/search.R")
+source("./CDTree/Node.R")
+source("./CDTree/build_tree_with_test_data.R")
+source("./CDTree/get_test_log_likelihood.R")
+source("./CDTree/predict_CDTree.R")
 
 args = commandArgs(trailingOnly=TRUE)
 
 if(length(args) == 0){
   # for test the code only
-  data_name = "localization"
-  file_path = paste("./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded/", data_name, ".csv", sep="")
+  data_name = "concrete"
+  file_path = paste("./CDTree/permuted_dataset_noiseadded/", data_name, ".csv", sep="")
 } else{
   data_name = args[1]
-  file_path = paste("./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded/", args[1], ".csv", sep="")  
+  file_path = paste("./CDTree/permuted_dataset_noiseadded/", args[1], ".csv", sep="")  
 }
 
 
@@ -82,7 +83,7 @@ res_df = data.frame(negloglikes, negloglikes_train, runtimes,
                     numLeafs, meanNumBins)
 res_df$data = data_name
 
-save_dir = paste("./conditional_entropy_estimation_fixed_hist/res_cde/",
+save_dir = paste("./CDTree/res_cde/",
                  date_for_file_name, "/", sep="")
 # check if the directory exists
 if(!dir.exists(save_dir)){
@@ -95,7 +96,7 @@ if(length(args) > 0){
 }
 
 
-
+predicted_density = predict_CDTree(tree, x_test, z_test)
 
 
 
