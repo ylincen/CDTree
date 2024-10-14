@@ -1,6 +1,10 @@
-generate_cuts_and_clforcuts = function(z){
-  l = 4   # essentially a search budget, deciding the maximum granularity
-  C = 5
+generate_cuts_and_clforcuts = function(z, l=7, C=5){
+  # This functions generates candidate cuts for z
+  # Inputs:
+  # z: a vector of feature variable
+  # l: the maximum granularity "level" of the search. 
+  # C: the parameter that controls the number of candidate cuts at each "layer"; the exact "C" parameter in the paper
+  
   cut_points_length = C * 2 ^ (0:l)
 
   # check if z is binary
@@ -28,7 +32,6 @@ get_cuts_for_z = function(z, cut_points_length){
   # Generate candidate cut points for z
   # cut_point_length: length of the cut points vector
   
-  # return(get_cuts_for_z_equal_binning)
   return(get_cuts_for_z_quantile(z, cut_points_length))
 }
 
@@ -45,11 +48,3 @@ get_cuts_for_z_quantile = function(z, cut_points_length){
   return(list(cuts=cuts, cl=cl_cut+cl_granularity))
 }
 
-get_cuts_for_z_equal_binning = function(z, cut_points_length){
-  cuts = seq(min(z), max(z), length.out=cut_points_length + 2)
-  granularity = log2(cut_points_length)
-  cl_granularity = Rissanen_integer_cl(granularity)
-  cl_cut = log2(cut_points_length)
-  
-  return(list(cuts=cuts, cl=cl_cut+cl_granularity))
-}

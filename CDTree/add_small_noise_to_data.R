@@ -1,21 +1,21 @@
 rm(list = ls())
 
-datasets = c("NavalPropolsion_permu", 
-             "forestfires_permu",
-             "superconductivity_permu",
-             "concrete_permu",
-             "localization_permu",
-             "synchronous_permu",
-             "energy_permu",
-             "slump_permu",
-             "toxicity_permu",
+datasets = c("NavalPropolsion", 
+             "forestfires",
+             "superconductivity",
+             "concrete",
+             "localization",
+             "synchronous",
+             "energy",
+             "slump",
+             "toxicity",
              "SkillCraft",
              "support2",
              "Thermography",
              "studentmath",
              "sml2010")
-data_path = "./conditional_entropy_estimation_fixed_hist/permuted_dataset/"
-new_data_save = "./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded/"
+data_path = "./CDTree/permuted_dataset/"
+new_data_save = "./CDTree/permuted_dataset_noiseadded/"
 # create a folder if not exist
 if(!dir.exists(new_data_save)){
   dir.create(new_data_save)
@@ -29,13 +29,13 @@ for(data_name in datasets){
   
   # check whether the target variable is a like discrete
   unique_ratio = length(unique(x)) / length(x)
-  if(unique_ratio < 0.2){
-    type_target = "discrete"
-    cat(data_name, "is a discrete dataset\n")
-  } else{
-    cat(data_name, "is a continuous dataset\n")
-    type_target = "continuous"
-  }
+  # if(unique_ratio < 0.2){
+  #   type_target = "discrete"
+  #   cat(data_name, "is a discrete dataset\n")
+  # } else{
+  #   cat(data_name, "is a continuous dataset\n")
+  #   type_target = "continuous"
+  # }
   
   # add a small noise to the feature/target variable to make 
   # it "real" continuous for both target and feature variables
@@ -53,7 +53,7 @@ for(data_name in datasets){
   x = x + rnorm(length(x), sd=sd_added)
   
   d_new = cbind(z, x)
-  write.csv(d_new, file = paste(new_data_save, 
-                                data_name, ".csv", sep=""), 
-            row.names = FALSE)
+  # write.csv(d_new, file = paste(new_data_save, 
+  #                               data_name, ".csv", sep=""), 
+  #           row.names = FALSE)
 }

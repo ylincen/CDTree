@@ -6,7 +6,7 @@ source("./CDTree/candidate_cuts.R")
 source("./CDTree/model_encoding.R")
 source("./CDTree/search.R")
 source("./CDTree/Node.R")
-source("./CDTree/build_tree_with_test_data.R")
+source("./CDTree/build_tree.R")
 source("./CDTree/get_test_log_likelihood.R")
 source("./CDTree/predict_CDTree.R")
 
@@ -14,7 +14,7 @@ args = commandArgs(trailingOnly=TRUE)
 
 if(length(args) == 0){
   # for test the code only
-  data_name = "concrete"
+  data_name = "localization"
   file_path = paste("./CDTree/permuted_dataset_noiseadded/", data_name, ".csv", sep="")
 } else{
   data_name = args[1]
@@ -66,12 +66,15 @@ for(cv in 1:5){
   x_test = x[test_index,]
   z_test = z[test_index,]
   start_time = Sys.time()
-  tree = build_tree_with_test_data(x=x_train, z_matrix=z_train, 
+  tree = build_tree(x=x_train, z_matrix=z_train, 
                                    x_test=x_test, z_test=z_test,
                                    eps=1e-3, print_process = F)
   end_time = Sys.time()
   
   res = get_test_log_likelihood(x_train, x_test, tree)
+  # The above line only works if the x_test and z_test is provided during the training process; 
+  # Otherwise, use "predicted_density = predict_CDTree(tree, x_test, z_test)" to get the predicted density 
+  
   negloglikes[cv] = res[[1]] / length(x_test)
   negloglikes_train[cv] = res[[3]] / length(x)
   runtimes[cv] = as.numeric(difftime(end_time, start_time, units = "secs"))
@@ -96,7 +99,6 @@ if(length(args) > 0){
 }
 
 
-predicted_density = predict_CDTree(tree, x_test, z_test)
 
 
 

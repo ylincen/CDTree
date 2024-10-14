@@ -1,6 +1,6 @@
 search_split = function(x, z, z_num_dim, default_hist_x, 
                         current_num_leaf_nodes, node_to_split,
-                        eps, z_matrix_local, default_grid){
+                        eps, z_matrix_local, default_bound){
   # OUTPUT: 
   # list(best_hist=best_hist_all_layers, best_gain=best_gain_all_layers, 
   #      best_z_cut = best_z_cut_all_layers)
@@ -37,17 +37,17 @@ search_split = function(x, z, z_num_dim, default_hist_x,
       }
       x_left_hist = 
         search_best_hist_and_boundary(x_left, eps=eps, 
-                                      default_grids=default_grid,
                                       inside_ratio=1,
                                       lo_quantile=NULL,
-                                      up_quantile=NULL)
+                                      up_quantile=NULL,
+                                      default_bound=default_bound)
       x_right_hist = 
         search_best_hist_and_boundary(x_right, 
                                       eps=eps,
-                                      default_grids=default_grid,
                                       inside_ratio=1,
                                       lo_quantile=NULL,
-                                      up_quantile=NULL)
+                                      up_quantile=NULL, 
+                                      default_bound=default_bound)
       
       other_nodes_total_cl = 0  # This is a constant that will cancel out; we put it here for interpretability
       tree_cl_model_change = get_cl_model_tree_change(current_num_leaf_nodes)
@@ -91,11 +91,11 @@ search_split = function(x, z, z_num_dim, default_hist_x,
 
 
 
-search_best_hist_and_boundary = function(x, up_quantile, lo_quantile, eps, default_grids, 
-                                         inside_ratio){
+search_best_hist_and_boundary = function(x, up_quantile, lo_quantile, eps, 
+                                         inside_ratio, default_bound){
 
-  left_boundary = default_grids[1]
-  right_boundary = default_grids[length(default_grids)]
+  left_boundary = default_bound[1]
+  right_boundary = default_bound[2]
   
   best_hist_res =
     search_best_num_bin(x,

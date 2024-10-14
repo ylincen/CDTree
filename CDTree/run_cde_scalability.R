@@ -1,23 +1,23 @@
 rm(list=ls())
 options(warn=0)
-source("./conditional_entropy_estimation_fixed_hist/data_encoding.R")
-source("./conditional_entropy_estimation_fixed_hist/hist.R")
-source("./conditional_entropy_estimation_fixed_hist/candidate_cuts.R")
-source("./conditional_entropy_estimation_fixed_hist/model_encoding.R")
-source("./conditional_entropy_estimation_fixed_hist/search.R")
-source("./conditional_entropy_estimation_fixed_hist/Node.R")
-source("./conditional_entropy_estimation_fixed_hist/build_tree_with_test_data.R")
-source("./conditional_entropy_estimation_fixed_hist/get_test_log_likelihood.R")
+source("./CDTree/data_encoding.R")
+source("./CDTree/hist.R")
+source("./CDTree/candidate_cuts.R")
+source("./CDTree/model_encoding.R")
+source("./CDTree/search.R")
+source("./CDTree/Node.R")
+source("./CDTree/build_tree.R")
+source("./CDTree/get_test_log_likelihood.R")
 
 args = commandArgs(trailingOnly=TRUE)
 
 if(length(args) == 0){
   # for test the code only
   data_name = "localization_3_indep_features"
-  file_path = paste("./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded_addingFeature/", data_name, ".csv", sep="")  
+  file_path = paste("./CDTree/permuted_dataset_noiseadded_addingFeature/", data_name, ".csv", sep="")  
 } else{
   data_name = args[1]
-  file_path = paste("./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded_addingFeature/", data_name, ".csv", sep="")  
+  file_path = paste("./CDTree/permuted_dataset_noiseadded_addingFeature/", data_name, ".csv", sep="")  
 }
 
 
@@ -72,7 +72,7 @@ for(cv in 1:5){
   x_test = x[test_index,]
   z_test = z[test_index,]
   start_time = Sys.time()
-  tree = build_tree_with_test_data(x=x_train, z_matrix=z_train, 
+  tree = build_tree(x=x_train, z_matrix=z_train, 
                                    x_test=x_test, z_test=z_test,
                                    eps=1e-3, print_process = F)
   end_time = Sys.time()
@@ -93,10 +93,10 @@ res_df = data.frame(negloglikes, negloglikes_train, runtimes,
 res_df$data = data_name
 
 if("indep" %in% data_name_split){
-  save_dir = paste("./conditional_entropy_estimation_fixed_hist/res_cde_scalability/", 
+  save_dir = paste("./CDTree/res_cde_scalability/", 
                    date_for_file_name, "_indep/", sep="")
 } else if("dep" %in% data_name_split){
-  save_dir = paste("./conditional_entropy_estimation_fixed_hist/res_cde_scalability/", 
+  save_dir = paste("./CDTree/res_cde_scalability/", 
                    date_for_file_name, "_dep/", sep="")
 } else{
   stop("data_name should contain either 'indep' or 'dep'")

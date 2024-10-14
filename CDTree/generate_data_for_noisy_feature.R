@@ -1,21 +1,21 @@
 rm(list=ls())
 set.seed(1)
-datasets = c("NavalPropolsion_permu", 
-             "forestfires_permu",
-             "superconductivity_permu",
-             "concrete_permu",
-             "localization_permu",
-             "synchronous_permu",
-             "energy_permu",
-             "slump_permu",
-             "toxicity_permu",
+datasets = c("NavalPropolsion", 
+             "forestfires",
+             "superconductivity",
+             "concrete",
+             "localization",
+             "synchronous",
+             "energy",
+             "slump",
+             "toxicity",
              "SkillCraft",
              "support2",
              "Thermography",
              "studentmath",
              "sml2010")
-data_path = "./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded/"
-new_data_path = "./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded_addingIndFeature/"
+data_path = "./CDTree/permuted_dataset_noiseadded/"
+new_data_path = "./CDTree/permuted_dataset_noiseadded_addingIndFeature/"
 
 # create a folder if not exist
 if(!dir.exists(new_data_path)){
@@ -35,7 +35,7 @@ for(data_name in datasets){
   }
 }
 
-new_dep_data_path = "./conditional_entropy_estimation_fixed_hist/permuted_dataset_noiseadded_addingDepFeature/"
+new_dep_data_path = "./CDTree/permuted_dataset_noiseadded_addingDepFeature/"
 
 # create a folder if not exist
 if(!dir.exists(new_dep_data_path)){

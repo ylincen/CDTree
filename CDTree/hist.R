@@ -1,18 +1,18 @@
 search_best_num_bin = function(x, eps, cl_boundary, inside_ratio,
-                               left_bound=NULL, right_bound=NULL, default_hist_x=NULL){
+                               left_bound, right_bound, default_hist_x=NULL,
+                               num_gap = 30,
+                               len = 2){
+  # This function constructs a histogram with the best number of bins that optimize the MDL score
+  # Inputs: 
+  #   x: the data point;
+  #   eps: data precision (see the comment of the function build_tree)
+  #   num_gap & len: parameters for a heuristic that speeds up the search for the best number of bins; see the paper for more details. 
+  #   cl_boundary, inside_ratio, default_hist_x: all deprecated!!
+  
   n = length(x)
 
-  # eps is officially a parameter for trade-off overfitting and goodness-of-fit, 
-  #   but we just set one for now. This involves "support estimation", 
-  #   which is difficult and beyond the scope of this project. 
-  eps = eps
+  stopifnot(!is.null(left_bound), !is.null(right_bound))
   
-  if(is.null(left_bound) & is.null(right_bound)){
-    browser()
-  }
-  
-  num_gap = 30
-  len = 2
   previous_cl_total = Inf
   previous_discrete_entropy = Inf
   # while(TRUE){
