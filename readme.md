@@ -33,7 +33,21 @@ For testing the code, we recommend using **RStudio**. Please note that using Con
    ```bash
    install.packages('SCCI')
 
-## III. Running Experiments
+   
+## III. Additional information about the code
+
+1. **The "fit" function**: The main function is the "build_tree" in "build_tree.R", which learns a CDTree from data.
+2. **CDTree as a collection of Leaf Nodes**: The tree is implemented as a set of leaf nodes. Each node is implemented as a "R list" that contains the following information (and more):
+   - Indices of training (test) data points that fall into this leaf
+   - The histogram equipped to this leaf
+   - All the "splits" (which feature, what operator, what value) that lead to this leaf node.
+   - etc..
+   - (Details to be found in the script Node.R)
+3. **Prediction**: To predict the conditional density of p(x|z), use "prediction_CDTree" in "predict_CDTree.R"; **Note that the notation is a bit different than the paper, in which we use p(y|x)**.
+4. **Example**: See "run_cde.R" for an example of using the code. 
+
+
+## IV. Running Experiments
 
 ### Steps
 1. **Navigate to Root Folder**: Use terminal to navigate to the root folder CDTree.
@@ -65,6 +79,9 @@ For testing the code, we recommend using **RStudio**. Please note that using Con
 6. **Run Experiments in Parallel:** You can run all datasets in parallel using the provided bash scripts:
     - run_cde.sh
     - run_cde_scala.sh
+  
+      
+
 
 
 
