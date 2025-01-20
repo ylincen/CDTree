@@ -10,7 +10,8 @@ The resulting model is fully interpretable and the training process does NOT req
 
 ### Requirements
 - **R** version 4.3.3
-- **R Packages**: 
+- **R Packages**:
+  - `Rcpp` >= 0.12.13
   - `SCCI`, which requires `Rcpp` >= 0.12.13
 
 ### Recommended Setup
